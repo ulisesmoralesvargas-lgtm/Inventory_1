@@ -13,7 +13,7 @@ import streamlit as st
 
 # ── Config ────────────────────────────────────────────────────────────────────
 # Set RAILWAY_API_URL in Streamlit Cloud → App Settings → Secrets
-API_URL: str = st.secrets.get("RAILWAY_API_URL", os.getenv("RAILWAY_API_URL", "http://localhost:8000"))
+API_URL: str = st.secrets.get("RAILWAY_API_URL", os.getenv("RAILWAY_API_URL", "https://Inventory_1-production.up.railway.app"))
 
 # ── Supabase Auth (client-side login) ────────────────────────────────────────
 from supabase import Client, create_client  # pip install supabase
