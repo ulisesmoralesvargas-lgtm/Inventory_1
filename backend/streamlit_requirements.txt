@@ -1,4 +1,0 @@
-streamlit==1.40.2
-requests==2.32.3
-supabase==2.9.1
-pandas==2.2.3
