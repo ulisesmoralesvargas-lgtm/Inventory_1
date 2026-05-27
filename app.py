@@ -21,7 +21,8 @@ from supabase import Client, create_client
 # ── API URL: set in Cloud Run → Edit & Deploy → Variables ────────────────────
 # Key:   CLOUD_RUN_API_URL
 # Value: https://inventory-api-xxxxxxxxxx-uc.a.run.app
-API_URL: str = os.environ.get("CLOUD_RUN_API_URL", "http://localhost:8080")
+api_url = os.environ.get("CLOUD_RUN_API_URL", "http://localhost:8080")
+API_URL: str = api_url
 
 # ── Supabase Auth (client-side login) ────────────────────────────────────────
 # Set in Cloud Run → Variables:
@@ -62,7 +63,7 @@ def ref_map(table: str) -> dict[str, int]:
     return {row["name"]: row["id"] for row in fetch_ref(table)}
 
 
-# ── Page: Login ─────────────────────────────────────────────────────────────[...]
+# ── Page: Login ──────────────────────────────────────────────────────────[...]
 def page_auth():
     st.title("🔐 Sign In")
     with st.form("login_form"):
