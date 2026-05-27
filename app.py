@@ -21,10 +21,7 @@ from supabase import Client, create_client
 # ── API URL: set in Cloud Run → Edit & Deploy → Variables ────────────────────
 # Key:   CLOUD_RUN_API_URL
 # Value: https://inventory-api-xxxxxxxxxx-uc.a.run.app
-API_URL: str = (
-    st.secrets.get("CLOUD_RUN_API_URL")
-    or os.getenv("CLOUD_RUN_API_URL", "http://localhost:8080")
-)
+API_URL: str = os.environ.get("CLOUD_RUN_API_URL", "http://localhost:8080")
 
 # ── Supabase Auth (client-side login) ────────────────────────────────────────
 # Set in Cloud Run → Variables:
@@ -46,7 +43,7 @@ for key, default in [("access_token", None), ("user_email", None), ("loaded_asse
         st.session_state[key] = default
 
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
+# ── Helpers ─────────────────────────────────────────────────────────────[...]
 def auth_headers() -> dict:
     token = st.session_state.get("access_token")
     return {"Authorization": f"Bearer {token}"} if token else {}
@@ -65,7 +62,7 @@ def ref_map(table: str) -> dict[str, int]:
     return {row["name"]: row["id"] for row in fetch_ref(table)}
 
 
-# ── Page: Login ───────────────────────────────────────────────────────────────
+# ── Page: Login ─────────────────────────────────────────────────────────────[...]
 def page_auth():
     st.title("🔐 Sign In")
     with st.form("login_form"):
@@ -146,7 +143,7 @@ def page_browse():
             st.error(str(e))
 
 
-# ── Page: Add Asset ───────────────────────────────────────────────────────────
+# ── Page: Add Asset ──────────────────────────────────────────────────────────[...]
 def page_add():
     if not st.session_state["access_token"]:
         st.warning("You must be logged in to add assets.")
@@ -235,7 +232,7 @@ def page_add():
             st.error(str(e))
 
 
-# ── Page: Update Asset ────────────────────────────────────────────────────────
+# ── Page: Update Asset ───────────────────────────────────────────────────────
 def page_update():
     if not st.session_state["access_token"]:
         st.warning("You must be logged in to update assets.")
@@ -308,7 +305,7 @@ def page_update():
             st.error(str(e))
 
 
-# ── Navigation ────────────────────────────────────────────────────────────────
+# ── Navigation ────────────────────────────────────────────────────────────[...]
 def main():
     st.set_page_config(
         page_title="Inventory Management System",
