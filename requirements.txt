@@ -4,3 +4,4 @@ supabase
 httpx
 pydantic>=2.0
 python-dotenv
+pandas
